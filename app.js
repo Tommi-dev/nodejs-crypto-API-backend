@@ -1,5 +1,6 @@
 const logger = require('./utils/logger')
 const { cryptoToolAPI } = require('./controller/crypto-tool-api')
+const { unknownEndpoint } = require('./utils/middleware')
 
 const app = (request, response) => {
 
@@ -23,8 +24,7 @@ const app = (request, response) => {
       break
 
     default:
-      response.statusCode = 404;
-      response.end();
+      unknownEndpoint(request, response)
   }
 
 }
