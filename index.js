@@ -1,5 +1,6 @@
 const http = require('http')
 const app = require('./app')
+const logger = require('./utils/logger')
 
 // Create server
 const server = http.createServer()
@@ -12,5 +13,5 @@ server.on('request', async (request, response) => {
 const PORT = process.env.PORT || 3001
 
 server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+  logger.info(`Server running on port ${PORT}`)
 })
