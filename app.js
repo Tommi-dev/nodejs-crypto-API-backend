@@ -1,4 +1,5 @@
 const logger = require('./utils/logger')
+const { cryptoToolAPI } = require('./controller/crypto-tool-api')
 
 const app = (request, response) => {
 
@@ -15,25 +16,15 @@ const app = (request, response) => {
   /**
    * Routes
    */
-   if (request.method === 'GET' && request.url === `/`) {
-    response.writeHead(200, { 'Content-Type': 'text/html' });
-    response.end( 
-      `<!DOCTYPE html>
-      <html>
-      <head>
-      <title>Crypto API</title>
-      </head>
-      <body>
-      
-      <h1>Hello world</h1>
-      
-      </body>
-      </html>`
-    );
+  switch (request.method, request.url) {
 
-  } else {
-    response.statusCode = 404;
-    response.end();
+    case 'POST', '/api/bitcoin-eur':
+      cryptoToolAPI('bitcoin', 'eur', request, response)
+      break
+
+    default:
+      response.statusCode = 404;
+      response.end();
   }
 
 }
