@@ -1,5 +1,5 @@
 POST http://localhost:3001/api/bitcoin-eur
-Content-Type: application/json;charset=utf-8
+Content-Type: application/;charset=utf-8;
 
 {
   "start": "2020-01-19",

@@ -4,22 +4,12 @@ const { unknownEndpoint } = require('./utils/middleware')
 
 const app = (request, response) => {
 
-  request.on('error', (err) => {
-    logger.error(err)
-    response.statusCode = 400
-    response.end()
-  })
-
-  response.on('error', (err) => {
-    logger.error(err)
-  })
-
   /**
    * Routes
    */
-  switch (request.method, request.url) {
+  switch (request.url) {
 
-    case 'POST', '/api/bitcoin-eur':
+    case '/api/bitcoin-eur':
       cryptoToolAPI('bitcoin', 'eur', request, response)
       break
 
