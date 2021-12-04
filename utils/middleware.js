@@ -18,6 +18,10 @@ const errorHandler = (err, request, response) => {
   if (err.message === 'Invalid method') {
     response.writeHead(405, headers)
     response.end()
+  } else if (err.name === 'ValidationError') {
+    let error = `${err.name} : ${err.message}`
+    response.writeHead(400, headers)
+    response.end(error)
   } else {
     response.writeHead(400, headers)
     response.end()
