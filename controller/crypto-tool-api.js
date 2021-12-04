@@ -1,4 +1,6 @@
-const logger = require('../utils/logger')
+/**
+ * Dependencies
+ */
 const { errorHandler, returnRequestBody, sendResponseBodyToClient } = require('../utils/middleware')
 const validator = require('../services/validations')
 const { fetchCoinGeckoAPI } = require('../models/coin-gecko-api')
@@ -7,6 +9,13 @@ const { returnLongestBearishTrend } = require('../services/longest-bearish-trend
 const { returnDateAndHighestTradingVolume } = require('../services/highest-trading-volume')
 const { returnTimeMachineAnswer } = require('../services/time-machine')
 
+/**
+ * Service layer for business logic. The function responds to the request with the desired cryptocurrency information.
+ * @param {String} crypto bitcoin, ethereum, cardano, etc.
+ * @param {String} fiat eur, usd, etc.
+ * @param {Object} request request object
+ * @param {Object} response response object
+ */
 const cryptoToolAPI = async (crypto, fiat, request, response) => {
 
   try {

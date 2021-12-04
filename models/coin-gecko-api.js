@@ -1,6 +1,17 @@
+/**
+ * Node.js standard modules
+ */
 const https = require('https')
 const url = require('url')
 
+/**
+ * Data access layer for working with another API. Retrieves data from CoinGeco's public API within a given date range.
+ * @param {String} crypto bitcoin, ethereum, cardano, etc.
+ * @param {String} fiat eur, usd, etc.
+ * @param {String} startDate start date in ISO8601 format
+ * @param {String} endDate end date in ISO8601 format
+ * @returns returns object
+ */
 const fetchCoinGeckoAPI = async (crypto, fiat, startDate, endDate) => {
 
   // Set time to the end of the date (time is closest to midnight in UTF time)
