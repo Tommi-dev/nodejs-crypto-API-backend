@@ -7,7 +7,7 @@ const { unknownEndpoint } = require('../utils/middleware')
  * @param {Object} request request object
  * @param {Object} response response object
  */
-const app = (request, response) => {
+const api = (request, response) => {
 
   /**
    * Routes
@@ -24,4 +24,4 @@ const app = (request, response) => {
 
 }
 
-module.exports = app
+module.exports = api
