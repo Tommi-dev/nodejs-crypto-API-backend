@@ -1,6 +1,6 @@
 const logger = require('../utils/logger')
 const { errorHandler, returnRequestBody, sendResponseBodyToClient } = require('../utils/middleware')
-const validator = require('../lib/validations')
+const validator = require('../services/validations')
 const { fetchCoinGeckoAPI } = require('../models/coin-gecko-api')
 
 const cryptoToolAPI = async (crypto, fiat, request, response) => {
