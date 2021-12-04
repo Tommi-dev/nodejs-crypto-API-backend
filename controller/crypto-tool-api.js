@@ -4,6 +4,20 @@ const validator = require('../services/validations')
 const { fetchCoinGeckoAPI } = require('../models/coin-gecko-api')
 const { returnDailyDataPoints } = require('../services/daily-data-points')
 
+const returnLongestBearishTrend = data => {
+  let days = [0]
+  let di = 0
+  for (let i = 1; i < data.prices.length; i++) {
+    if (data.prices[i][1] < data.prices[i - 1][1]) {
+      days[di] += 1
+      continue
+    }
+    di += 1
+    days.push(0)
+  }
+  return Math.max(...days)
+}
+
 const cryptoToolAPI = async (crypto, fiat, request, response) => {
 
   try {
@@ -35,9 +49,16 @@ const cryptoToolAPI = async (crypto, fiat, request, response) => {
     let dataWithDailyDataPoints = returnDailyDataPoints(data)
 
     /**
+     * Create new body object
+     */
+    let newBody = {
+      longest_bearish_trend: returnLongestBearishTrend(dataWithDailyDataPoints)
+    }
+
+    /**
      * Handling response body
      */
-    sendResponseBodyToClient(dataWithDailyDataPoints, response)
+    sendResponseBodyToClient(newBody, response)
 
   } catch (err) {
     errorHandler(err, request, response)
