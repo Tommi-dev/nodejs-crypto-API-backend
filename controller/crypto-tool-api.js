@@ -4,19 +4,7 @@ const validator = require('../services/validations')
 const { fetchCoinGeckoAPI } = require('../models/coin-gecko-api')
 const { returnDailyDataPoints } = require('../services/daily-data-points')
 const { returnLongestBearishTrend } = require('../services/longest-bearish-trend')
-
-const returnDateAndHighestTradingVolume = data => {
-
-  let tradingVolumes = data.total_volumes.map(volume => volume[1])
-  let dateThatHaveHighestTradingVolume = data.total_volumes.find(datapoint => datapoint[1] === Math.max(...tradingVolumes))
-  const dateAndHighestTradingVolume = {
-    date: dateThatHaveHighestTradingVolume[0],
-    volume_in_fiat: dateThatHaveHighestTradingVolume[1]
-  }
-
-  return dateAndHighestTradingVolume
-
-}
+const { returnDateAndHighestTradingVolume } = require('../services/highest-trading-volume')
 
 const cryptoToolAPI = async (crypto, fiat, request, response) => {
 
