@@ -8,6 +8,65 @@ class ValidationError extends Error {
   }
 }
 
+const checkThatTheStartDateIsBeforeTheEndDate = (startDate, endDate) => {
+
+  let start = ''
+  let end = ''
+  let arrStart = []
+  let arrEnd = []
+
+  for (let i = 0; i < startDate.length; i++) {
+    if (startDate[i] === '-') {
+      arrStart.push(Number(start))
+      arrEnd.push(Number(end))
+      start = ''
+      end = ''
+      continue
+    }
+    start += startDate[i]
+    end += endDate[i]
+  }
+
+  arrStart.push(Number(start))
+  arrEnd.push(Number(end))
+
+  for (let i = 0; i < arrStart.length; i++) {
+  
+    if (i === arrStart.length - 1) {
+      if (arrStart[i] >= arrEnd[i] && arrStart[1] >= arrEnd[1] && arrStart[0] >= arrEnd[0]) {
+        throw new ValidationError('Start date must be before the end date')
+      }
+    }
+  
+    if (arrStart[i] > arrEnd[i]) {
+      throw new ValidationError('Start date must be before the end date')
+    }
+  
+  }
+
+}
+
+const checkThatDataIsInISO8601Format = (...params) => {
+
+  for (let i = 0; i < params.length; i++) {
+
+    if (typeof(params[i]) !== 'string') {
+      throw new ValidationError('Invalid data')
+    }
+
+    if (!isDataISO8601(params[i])) {
+      throw new ValidationError('Data is not in ISO8601 format')
+    }
+  }
+}
+
+const isDataISO8601 = data => {
+  if (((data).match(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/g))) {
+    return true
+  }
+  return false  
+}
+
 const checkObjectProperties = (object, ...params) => {
 
   if (!checkThatObjectHaveRightProperties(object, ...params)) {
@@ -55,6 +114,8 @@ const cryptoToolAPI = async (crypto, fiat, request, response) => {
     let body = await returnRequestBody(request)
 
     checkObjectProperties(body, 'start', 'end')
+    checkThatDataIsInISO8601Format(body.start, body.end)
+    checkThatTheStartDateIsBeforeTheEndDate(body.start, body.end)
 
     /**
      * Handling response body
