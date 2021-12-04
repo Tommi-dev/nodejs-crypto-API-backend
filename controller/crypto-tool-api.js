@@ -5,6 +5,19 @@ const { fetchCoinGeckoAPI } = require('../models/coin-gecko-api')
 const { returnDailyDataPoints } = require('../services/daily-data-points')
 const { returnLongestBearishTrend } = require('../services/longest-bearish-trend')
 
+const returnDateAndHighestTradingVolume = data => {
+
+  let tradingVolumes = data.total_volumes.map(volume => volume[1])
+  let dateThatHaveHighestTradingVolume = data.total_volumes.find(datapoint => datapoint[1] === Math.max(...tradingVolumes))
+  const dateAndHighestTradingVolume = {
+    date: dateThatHaveHighestTradingVolume[0],
+    volume_in_fiat: dateThatHaveHighestTradingVolume[1]
+  }
+
+  return dateAndHighestTradingVolume
+
+}
+
 const cryptoToolAPI = async (crypto, fiat, request, response) => {
 
   try {
@@ -39,7 +52,8 @@ const cryptoToolAPI = async (crypto, fiat, request, response) => {
      * Create new body object
      */
     let newBody = {
-      longest_bearish_trend: returnLongestBearishTrend(dataWithDailyDataPoints)
+      longest_bearish_trend: returnLongestBearishTrend(dataWithDailyDataPoints),
+      highest_trading_volume: returnDateAndHighestTradingVolume(dataWithDailyDataPoints)
     }
 
     /**
