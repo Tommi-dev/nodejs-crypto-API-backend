@@ -6,6 +6,25 @@ const { returnDailyDataPoints } = require('../services/daily-data-points')
 const { returnLongestBearishTrend } = require('../services/longest-bearish-trend')
 const { returnDateAndHighestTradingVolume } = require('../services/highest-trading-volume')
 
+const returnTimeMachineAnswer = data => {
+  let bitcoinPrices = data.prices.map(datapoint => datapoint[1])
+  let lowestPrice = data.prices.find(datapoint => datapoint[1] === Math.min(...bitcoinPrices))
+  let newBitcoinPrices = bitcoinPrices.slice(bitcoinPrices.indexOf(lowestPrice[1]), bitcoinPrices.length)
+  let highestPrice = data.prices.find(datapoint => datapoint[1] === Math.max(...newBitcoinPrices))
+  let timeMachine = {
+    buy: lowestPrice[0],
+    sell: highestPrice[0],
+    message: ''
+  }
+  if (lowestPrice[1] === highestPrice[1]) {
+    timeMachine.message = 'Bear market! Don\'t buy or sell!'
+    timeMachine.buy = ''
+    timeMachine.sell = ''
+    return timeMachine
+  }
+  return timeMachine
+}
+
 const cryptoToolAPI = async (crypto, fiat, request, response) => {
 
   try {
@@ -41,7 +60,8 @@ const cryptoToolAPI = async (crypto, fiat, request, response) => {
      */
     let newBody = {
       longest_bearish_trend: returnLongestBearishTrend(dataWithDailyDataPoints),
-      highest_trading_volume: returnDateAndHighestTradingVolume(dataWithDailyDataPoints)
+      highest_trading_volume: returnDateAndHighestTradingVolume(dataWithDailyDataPoints),
+      time_machine_response: returnTimeMachineAnswer(dataWithDailyDataPoints)
     }
 
     /**
