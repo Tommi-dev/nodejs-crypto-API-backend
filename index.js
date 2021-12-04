@@ -1,5 +1,5 @@
 const http = require('http')
-const app = require('./app')
+const api = require('./api/api')
 const logger = require('./utils/logger')
 const config = require('./utils/config')
 
@@ -8,7 +8,7 @@ const server = http.createServer()
 
 // Listen to the request event
 server.on('request', async (request, response) => {
-  app(request, response) // application
+  api(request, response) // Controller layer
 })
 
 server.listen(config.PORT, () => {
