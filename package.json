@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "deploy": "git push heroku main",
+    "deploy:full": "git add . && git commit -m deploy && git push && npm run deploy",
+    "logs:prod": "heroku logs --tail",
     "test": "node test.js ./tests/unit-tests/unit-tests.js"
   },
   "repository": {
