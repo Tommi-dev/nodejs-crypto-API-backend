@@ -1,5 +1,5 @@
-const { isDataISO8601Test } = require('./isData8601-test')
-const { convertISO8601ToUNIXTest } = require('./convertISO8601ToUNIX-test')
+const { validationsTest } = require('./services-test/validations-test')
+const { convertISO8601ToUNIXTest } = require('./models-test/convertISO8601ToUNIX-test.js')
 
-isDataISO8601Test()
+validationsTest()
 convertISO8601ToUNIXTest()

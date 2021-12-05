@@ -73,7 +73,7 @@ const checkObjectProperties = (object, ...params) => {
     throw new ValidationError('Property missing')
   }
 
-  if (!checkThatObjectDoesntHaveOtherProperties(object, ...params)) {
+  if (!theObjectHaveTheCorrectNumberOfProperties(object, ...params)) {
     throw new ValidationError('Too many properties')
   }
 
@@ -93,7 +93,7 @@ const checkThatObjectHaveRightProperties = (object, ...params) => {
 
 }
 
-const checkThatObjectDoesntHaveOtherProperties = (object, ...params) => {
+const theObjectHaveTheCorrectNumberOfProperties = (object, ...params) => {
 
   let i = 0
   for (let property in object) {
@@ -112,5 +112,7 @@ module.exports = {
   checkObjectProperties,
   checkThatDataIsInISO8601Format,
   checkThatTheStartDateIsBeforeTheEndDate,
-  isDataISO8601
+  isDataISO8601,
+  checkThatObjectHaveRightProperties,
+  theObjectHaveTheCorrectNumberOfProperties
 }

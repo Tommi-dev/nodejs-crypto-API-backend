@@ -1,5 +1,5 @@
 const assert = require('assert')
-const { convertISO8601ToUNIX } = require('../../models/coin-gecko-api')
+const { convertISO8601ToUNIX } = require('../../../models/coin-gecko-api')
 
 const convertISO8601ToUNIXTest = () => {
 

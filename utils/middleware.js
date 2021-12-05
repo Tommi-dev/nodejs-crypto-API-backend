@@ -2,7 +2,13 @@ const logger = require('./logger')
 
 const unknownEndpoint = (request, response) => {
 
-  response.statusCode = 404
+  const headers = {
+    'Content-Type': 'application/json;charset=utf-8',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST'
+  }
+
+  response.writeHead(404, headers)
   response.end()
 
 }
