@@ -111,5 +111,6 @@ const checkThatObjectDoesntHaveOtherProperties = (object, ...params) => {
 module.exports = {
   checkObjectProperties,
   checkThatDataIsInISO8601Format,
-  checkThatTheStartDateIsBeforeTheEndDate
+  checkThatTheStartDateIsBeforeTheEndDate,
+  isDataISO8601
 }

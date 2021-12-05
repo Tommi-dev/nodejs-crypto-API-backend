@@ -73,4 +73,4 @@ const convertISO8601ToUNIX = date => {
   return unixTimeStamp
 } 
 
-module.exports = { fetchCoinGeckoAPI }
+module.exports = { fetchCoinGeckoAPI, convertISO8601ToUNIX }
