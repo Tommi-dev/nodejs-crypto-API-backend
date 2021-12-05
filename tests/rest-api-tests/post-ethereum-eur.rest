@@ -1,0 +1,7 @@
+POST http://localhost:3001/api/ethereum-eur
+Content-Type: application/;charset=utf-8;
+
+{
+  "start": "2020-01-19",
+  "end": "2020-01-20"
+}
