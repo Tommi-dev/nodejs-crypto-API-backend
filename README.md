@@ -17,23 +17,23 @@ Before installing, download and install Node.js https://nodejs.org/en/download/.
 Download github repository:    
   
 ```bash
-$ git clone https://github.com/Tommi-dev/nodejs-crypto-API-backend.git  
+git clone https://github.com/Tommi-dev/nodejs-crypto-API-backend.git  
 ```  
   
 Go to the root directory and remove .git:  
   
 ```bash
-$ cd nodejs-crypto-API-backend/  
+cd nodejs-crypto-API-backend/  
 ```  
   
 ```bash
-$ rm -rf .git
+rm -rf .git
 ```  
   
 Install dependencies:  
   
 ```bash
-$ npm install
+npm install
 ```  
   
 ---  
@@ -43,13 +43,13 @@ $ npm install
 Audit package dependencies for security vulnerabilities:    
   
 ```bash
-$ npm audit
+npm audit
 ```  
   
 Start the server:  
   
 ```bash
-$ npm start
+npm start
 ```  
   
 ---  
@@ -174,13 +174,13 @@ If you want to analyze different currencies with other fiats, it’s easy to sca
 Execute the unit tests:    
   
 ```bash
-$ npm run test
+npm run test
 ```  
   
 Execute REST API tests:  
   
 ```bash
-$ npm start  
+npm start  
 ```  
   
 `Send Request`  
@@ -195,12 +195,12 @@ Before deploying, sign up or log in to Heroku https://www.heroku.com/home.
 Create Heroku application:  
   
 ```bash
-$ heroku create
+heroku create
 ```  
   
 Move your code to Heroku:  
   
 ```bash
-$ npm run deploy
+npm run deploy
 ```  
   
