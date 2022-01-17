@@ -1,3 +1,5 @@
+const { convertISO8601ToUNIX } = require('../models/coin-gecko-api')
+
 class ValidationError extends Error {
   constructor(message) {
     super(message); // (1)
@@ -7,38 +9,11 @@ class ValidationError extends Error {
 
 const checkThatTheStartDateIsBeforeTheEndDate = (startDate, endDate) => {
 
-  let start = ''
-  let end = ''
-  let arrStart = []
-  let arrEnd = []
+  let startDateUNIX = convertISO8601ToUNIX(startDate) 
+  let endDateUNIX = convertISO8601ToUNIX(endDate) 
 
-  for (let i = 0; i < startDate.length; i++) {
-    if (startDate[i] === '-') {
-      arrStart.push(Number(start))
-      arrEnd.push(Number(end))
-      start = ''
-      end = ''
-      continue
-    }
-    start += startDate[i]
-    end += endDate[i]
-  }
-
-  arrStart.push(Number(start))
-  arrEnd.push(Number(end))
-
-  for (let i = 0; i < arrStart.length; i++) {
-  
-    if (i === arrStart.length - 1) {
-      if (arrStart[i] >= arrEnd[i] && arrStart[1] >= arrEnd[1] && arrStart[0] >= arrEnd[0]) {
-        throw new ValidationError('Start date must be before the end date')
-      }
-    }
-  
-    if (arrStart[i] > arrEnd[i]) {
-      throw new ValidationError('Start date must be before the end date')
-    }
-  
+  if (startDateUNIX >= endDateUNIX) {
+    throw new ValidationError('Start date must be before the end date')
   }
 
 }
