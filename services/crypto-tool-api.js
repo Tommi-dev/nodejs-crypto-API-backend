@@ -2,7 +2,7 @@
  * Module dependencies
  */
 const { errorHandler, returnRequestBody, sendResponseBodyToClient } = require('../utils/middleware')
-const validator = require('./validations')
+const { validator } = require('./validations')
 const { fetchCoinGeckoAPI } = require('../models/coin-gecko-api')
 const { returnDailyDataPoints } = require('./daily-data-points')
 const { returnLongestBearishTrend } = require('./longest-bearish-trend')
@@ -38,9 +38,7 @@ const cryptoToolAPI = async (crypto, fiat, request, response) => {
     /**
      * Validation tests to ensure that the request body is in the correct format
      */
-    validator.checkObjectProperties(body, 'start', 'end')
-    validator.checkThatDataIsInISO8601Format(body.start, body.end)
-    validator.checkThatTheStartDateIsBeforeTheEndDate(body.start, body.end)
+    validator(body, 'start', 'end')
 
     /**
      * Retrieving data from API with given cryptocurrency, fiat money and time period
