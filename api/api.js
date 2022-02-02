@@ -1,4 +1,3 @@
-const logger = require('../utils/logger')
 const { cryptoToolAPI } = require('../services/crypto-tool-api')
 const { unknownEndpoint } = require('../utils/middleware')
 
