@@ -1,5 +1,3 @@
-const { convertISO8601ToUNIX } = require('../models/coin-gecko-api')
-
 class ValidationError extends Error {
   constructor(message) {
     super(message); // (1)
