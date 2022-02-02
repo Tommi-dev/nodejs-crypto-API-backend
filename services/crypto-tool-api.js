@@ -1,5 +1,5 @@
 /**
- * Dependencies
+ * Module dependencies
  */
 const { errorHandler, returnRequestBody, sendResponseBodyToClient } = require('../utils/middleware')
 const validator = require('./validations')
@@ -18,8 +18,14 @@ const { returnTimeMachineAnswer } = require('./time-machine')
  */
 const cryptoToolAPI = async (crypto, fiat, request, response) => {
 
+  /**
+   * Handling runtime errors
+   */
   try {
 
+    /**
+     * Handling request method
+     */
     if (request.method !== 'POST') {
       throw new Error('Invalid method')
     }
