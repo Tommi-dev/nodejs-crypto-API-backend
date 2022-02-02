@@ -66,16 +66,11 @@ const checkThatObjectHaveRightProperties = (object, ...params) => {
 
 const theObjectHaveTheCorrectNumberOfProperties = (object, ...params) => {
 
-  let i = 0
-  for (let property in object) {
-    i++
+  if (Object.keys(object).length === params.length) {
+    return true
   }
 
-  if (params.length !== i) {
-    return false
-  } 
-
-  return true
+  return false
 
 }
 
