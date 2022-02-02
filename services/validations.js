@@ -44,12 +44,12 @@ const isDataISO8601 = data => {
 
 const checkObjectProperties = (object, ...params) => {
 
-  if (!checkThatObjectHaveRightProperties(object, ...params)) {
-    throw new ValidationError('Property missing')
+  if (!theObjectHaveTheCorrectNumberOfProperties(object, ...params)) {
+    throw new ValidationError('Invalid number of properties')
   }
 
-  if (!theObjectHaveTheCorrectNumberOfProperties(object, ...params)) {
-    throw new ValidationError('Too many properties')
+  if (!checkThatObjectHaveRightProperties(object, ...params)) {
+    throw new ValidationError('Invalid property')
   }
 
 }
