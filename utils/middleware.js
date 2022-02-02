@@ -35,16 +35,31 @@ const errorHandler = (err, request, response) => {
 
 }
 
-const returnRequestBody = async (request) => {
+/**
+ * Function returns Promise
+ * @param {Object} request 
+ * @returns {Promise}
+ */
+const returnRequestBody = (request) => {
 
-  let body = await new Promise(function (resolve, reject) {
+  let body = new Promise(function (resolve, reject) {
 
+    /**
+     * Grabbing data from the stream using the readable stream interface
+     */
+    
     let requestBody = []
-    request.on('data', (chunk) => {
-      requestBody.push(chunk)
-    })
 
-    request.on('end', () => {
+    // Listener to the error events
+    request.on('error', (err) => {
+      throw new Error("Server side error")
+
+    // Switching the stream into flowing mode
+    }).on('data', (chunk) => {
+      requestBody.push(chunk)
+
+    // end event is emitted when there is no more data to be consumed from the stream
+    }).on('end', () => {
       try {
         requestBody = JSON.parse(Buffer.concat(requestBody))
       } catch (err) {
@@ -52,6 +67,7 @@ const returnRequestBody = async (request) => {
       }
       resolve(requestBody)
     })
+
   })
 
   return body
