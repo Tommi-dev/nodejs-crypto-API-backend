@@ -1,6 +1,6 @@
 {
   "name": "nodejs-crypto-api-backend",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Crypto API",
   "main": "index.js",
   "scripts": {
