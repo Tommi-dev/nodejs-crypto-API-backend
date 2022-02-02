@@ -58,34 +58,29 @@ const validationsTest = () => {
   describe('checkThatObjectHaveRightProperties( body, ...arguments )', () => {
 
     console.log('\n\tbody: ', body)
-    test('With the given function arguments: \'start\', \'end\', \'end\' and \'start\', function returns true.', () => {
-      const result = checkThatObjectHaveRightProperties(body, 'start', 'end', 'end', 'start')
-      assert.equal(result, true)
+    test('A function with three arguments returns false.', () => {
+      const result = checkThatObjectHaveRightProperties(body, 'start', 'end', 'end')
+      assert.equal(result, false)
+    })
+
+    test('A function with one argument returns false.', () => {
+      const result = checkThatObjectHaveRightProperties(body, 'start')
+      assert.equal(result, false)
     })
   
+    test('With the given function arguments: \'startt\' and \'end\', function returns false.', () => {
+      const result = checkThatObjectHaveRightProperties(body, 'startt', 'end')
+      assert.equal(result, false)
+    })
+
+    test('A function with zero arguments returns false.', () => {
+      const result = checkThatObjectHaveRightProperties(body)
+      assert.equal(result, false)
+    })
+
     test('With the given function arguments: \'start\' and \'end\', function returns true.', () => {
       const result = checkThatObjectHaveRightProperties(body, 'start', 'end')
       assert.equal(result, true)
-    })
-  
-    test('With the given function arguments: \'start\', function returns true.', () => {
-      const result = checkThatObjectHaveRightProperties(body, 'start')
-      assert.equal(result, true)
-    })
-
-    test('With the given function arguments: \'end\', function returns true.', () => {
-      const result = checkThatObjectHaveRightProperties(body, 'end')
-      assert.equal(result, true)
-    })
-
-    test('With the given function arguments: \'start\', \'end\' and \'test\', function returns false.', () => {
-      const result = checkThatObjectHaveRightProperties(body, 'start', 'end', 'test')
-      assert.equal(result, false)
-    })
-
-    test('With the given function arguments: \'test2\', function returns false.', () => {
-      const result = checkThatObjectHaveRightProperties(body, 'test2')
-      assert.equal(result, false)
     })
 
   })
