@@ -41,12 +41,11 @@ const theObjectHaveTheCorrectNumberOfProperties = (object, ...params) => {
 
 const checkThatTheStartDateIsBeforeTheEndDate = (startDate, endDate) => {
 
-  let startDateUNIX = convertISO8601ToUNIX(startDate) 
-  let endDateUNIX = convertISO8601ToUNIX(endDate) 
-
-  if (startDateUNIX >= endDateUNIX) {
-    throw new ValidationError('Start date must be before the end date')
+  if (new Date(startDate).getTime() >= new Date(endDate).getTime()) {
+    return false
   }
+
+  return true
 
 }
 
