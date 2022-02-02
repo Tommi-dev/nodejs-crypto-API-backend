@@ -56,15 +56,11 @@ const checkObjectProperties = (object, ...params) => {
 
 const checkThatObjectHaveRightProperties = (object, ...params) => {
 
-  for (let i = 0; i < params.length; i++) {
-
-    if (!(params[i] in object)) {
-      return false
-    }
-
+  if (JSON.stringify(Object.keys(object)) === JSON.stringify(params)) {
+    return true
   }
 
-  return true
+  return false
 
 }
 
