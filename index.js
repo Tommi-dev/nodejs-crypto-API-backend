@@ -7,7 +7,7 @@ const config = require('./utils/config')
 const server = http.createServer()
 
 // Listen to the request event
-server.on('request', async (request, response) => {
+server.on('request', (request, response) => {
   api(request, response) // Controller layer
 })
 
