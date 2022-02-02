@@ -55,7 +55,7 @@ const checkThatDataIsInISO8601Format = (...params) => {
   for (let i = 0; i < params.length; i++) {
 
     if (typeof(params[i]) !== 'string') {
-      throw new ValidationError('Invalid data')
+      throw new ValidationError('Data is not in string format.')
     }
 
     if (!isDataISO8601(params[i])) {
