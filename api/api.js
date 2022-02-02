@@ -1,3 +1,6 @@
+/**
+ * Module dependencies
+ */
 const { cryptoToolAPI } = require('../services/crypto-tool-api')
 const { unknownEndpoint } = require('../utils/middleware')
 
@@ -13,8 +16,9 @@ const api = (request, response) => {
    */
   switch (request.url) {
 
+    // Route
     case '/api/bitcoin-eur': // endpoint
-      cryptoToolAPI('bitcoin', 'eur', request, response)
+      cryptoToolAPI('bitcoin', 'eur', request, response) // Service layer
       break
 
     default:
