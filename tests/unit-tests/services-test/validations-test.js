@@ -2,7 +2,8 @@ const assert = require('assert')
 const { 
   isDataISO8601, 
   checkThatObjectHaveRightProperties,
-  theObjectHaveTheCorrectNumberOfProperties
+  theObjectHaveTheCorrectNumberOfProperties,
+  checkThatTheStartDateIsBeforeTheEndDate
 } = require('../../../services/validations')
 
 const validationsTest = () => {
@@ -116,6 +117,31 @@ const validationsTest = () => {
     test('With the given function arguments: \'test2\', the number of body properties is different.', () => {
       const result = theObjectHaveTheCorrectNumberOfProperties(body, 'test2')
       assert.equal(result, false)
+    })
+
+  })
+
+  describe('checkThatTheStartDateIsBeforeTheEndDate( startDate, endDate )', () => {
+
+    console.log('\n\tbody: ', body)
+    test(`startDate: 2020-01-02, endDate: ${body.end}. Function returns false.`, () => {
+      const result = checkThatTheStartDateIsBeforeTheEndDate('2020-01-02', body.end)
+      assert.equal(result, false)
+    })
+
+    test(`startDate: 2020-02-01, endDate: ${body.end}. Function returns false.`, () => {
+      const result = checkThatTheStartDateIsBeforeTheEndDate('2020-02-01', body.end)
+      assert.equal(result, false)
+    })
+
+    test(`startDate: 2021-01-01, endDate: ${body.end}. Function returns false.`, () => {
+      const result = checkThatTheStartDateIsBeforeTheEndDate('2021-01-01', body.end)
+      assert.equal(result, false)
+    })
+
+    test(`startDate: 2019-01-01, endDate: ${body.end}. Function returns false.`, () => {
+      const result = checkThatTheStartDateIsBeforeTheEndDate('2019-01-01', body.end)
+      assert.equal(result, true)
     })
 
   })
