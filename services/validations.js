@@ -7,6 +7,38 @@ class ValidationError extends Error {
   }
 }
 
+const checkObjectProperties = (object, ...params) => {
+
+  if (!theObjectHaveTheCorrectNumberOfProperties(object, ...params)) {
+    throw new ValidationError('Invalid number of properties')
+  }
+
+  if (!checkThatObjectHaveRightProperties(object, ...params)) {
+    throw new ValidationError('Invalid property')
+  }
+
+}
+
+const checkThatObjectHaveRightProperties = (object, ...params) => {
+
+  if (JSON.stringify(Object.keys(object)) === JSON.stringify(params)) {
+    return true
+  }
+
+  return false
+
+}
+
+const theObjectHaveTheCorrectNumberOfProperties = (object, ...params) => {
+
+  if (Object.keys(object).length === params.length) {
+    return true
+  }
+
+  return false
+
+}
+
 const checkThatTheStartDateIsBeforeTheEndDate = (startDate, endDate) => {
 
   let startDateUNIX = convertISO8601ToUNIX(startDate) 
@@ -35,38 +67,6 @@ const checkThatDataIsInISO8601Format = (...params) => {
 const isDataISO8601 = data => {
 
   if (((data).match(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/g))) {
-    return true
-  }
-
-  return false
-
-}
-
-const checkObjectProperties = (object, ...params) => {
-
-  if (!theObjectHaveTheCorrectNumberOfProperties(object, ...params)) {
-    throw new ValidationError('Invalid number of properties')
-  }
-
-  if (!checkThatObjectHaveRightProperties(object, ...params)) {
-    throw new ValidationError('Invalid property')
-  }
-
-}
-
-const checkThatObjectHaveRightProperties = (object, ...params) => {
-
-  if (JSON.stringify(Object.keys(object)) === JSON.stringify(params)) {
-    return true
-  }
-
-  return false
-
-}
-
-const theObjectHaveTheCorrectNumberOfProperties = (object, ...params) => {
-
-  if (Object.keys(object).length === params.length) {
     return true
   }
 
