@@ -43,7 +43,7 @@ const cryptoToolAPI = async (crypto, fiat, request, response) => {
     /**
      * Retrieving data from API with given cryptocurrency, fiat money and time period
      */
-    const data = await fetchCoinGeckoAPI(crypto, fiat, body.start, body.end)
+    const data = await fetchCoinGeckoAPI(crypto, fiat, body['start'], body['end'])
 
     /**
      * Cleaning up retrieved data ( get daily datapoints )
