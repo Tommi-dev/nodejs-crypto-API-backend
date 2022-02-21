@@ -18,6 +18,7 @@ const returnDailyDataPoints = data => {
   let newBitcoinDataPrices = []
   let newBitcoinDataMarketCap = []
   let newBitcoinDataTotalVolume = []
+
   for (let i = 0; i < indexes.length; i++) {
     newBitcoinDataPrices.push([...data.prices[indexes[i]]])
     newBitcoinDataMarketCap.push([...data.market_caps[indexes[i]]])
